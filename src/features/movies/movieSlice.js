@@ -13,8 +13,20 @@ export const fetchAsyncMovies = createAsyncThunk(
   },
 );
 
+export const fetchAsyncShows = createAsyncThunk(
+  'movies/fetchAsyncShows',
+  async () => {
+    const seriesText = 'Friends';
+    const response = await movieApi.get(
+      `?apiKey=${APIKey}&s=${seriesText}&type=series`,
+    );
+    return response.data;
+  },
+);
+
 const initialState = {
-  movies: [],
+  movies: {},
+  shows: {},
 };
 
 const movieSlice = createSlice({
@@ -32,15 +44,20 @@ const movieSlice = createSlice({
       console.log('Pending');
     },
     [fetchAsyncMovies.fulfilled]: (state, { payload }) => {
-      console.log('Pending');
+      console.log('Fulfilled!');
       return { ...state, movies: payload };
     },
     [fetchAsyncMovies.rejected]: () => {
-      console.log('Pending');
+      console.log('Rejected!');
+    },
+    [fetchAsyncShows.fulfilled]: (state, { payload }) => {
+      console.log('Fulfilled!');
+      return { ...state, shows: payload };
     },
   },
 });
 
 export const { addMovies } = movieSlice.actions; // 액션 추가
 export const getAllMovies = (state) => state.reducerName.movies; //state.스토어에 등록한 리듀서 이름.초기값 state이름
+export const getAllShows = (state) => state.reducerName.shows;
 export default movieSlice.reducer;
