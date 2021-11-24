@@ -1,13 +1,24 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import {
+  fetchAsyncMovies,
+  fetchAsyncShows,
+} from '../../features/movies/movieSlice';
 import user from '../../images/user.png';
 import './Header.scss';
 
 const Header = () => {
   const [term, setTerm] = useState('');
+  const dispatch = useDispatch();
   const submitHandler = (e) => {
-    e.preventDefault();
-    console.log(term);
+    e.preventDefault(); //새로고침 막기
+    if (term === '') {
+      return alert('내용을 입력해 주세요!');
+    }
+    dispatch(fetchAsyncMovies(term));
+    dispatch(fetchAsyncShows(term));
+    setTerm('');
   };
   return (
     <div className="header">

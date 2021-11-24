@@ -8,10 +8,12 @@ import {
 } from '../../features/movies/movieSlice';
 
 const Home = () => {
+  const movieText = 'avengers';
+  const showText = 'friends';
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchAsyncMovies());
-    dispatch(fetchAsyncShows());
+    dispatch(fetchAsyncMovies(movieText));
+    dispatch(fetchAsyncShows(showText));
   }, [dispatch]);
   // useEffect :
   // 두번째 인자값은 deps을 넣는다.
