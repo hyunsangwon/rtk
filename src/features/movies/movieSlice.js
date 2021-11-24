@@ -46,6 +46,9 @@ const movieSlice = createSlice({
     addMovies: (state, { payload }) => {
       state.movies = payload;
     },
+    removeSelectedMovieOrShow: (state) => {
+      state.selectMovieOrShow = {};
+    },
   },
   //extraReducers는 반대로 외부/비동기 action을 넣는 공간. (optional)
   extraReducers: {
@@ -70,7 +73,7 @@ const movieSlice = createSlice({
   },
 });
 
-export const { addMovies } = movieSlice.actions; // 액션 추가
+export const { addMovies, removeSelectedMovieOrShow } = movieSlice.actions; // 액션 추가
 export const getAllMovies = (state) => state.reducerName.movies; //state.스토어에 등록한 리듀서 이름.초기값 state이름
 export const getAllShows = (state) => state.reducerName.shows;
 export const getSelectedMovieOrShow = (state) =>
