@@ -3,7 +3,7 @@ import movieApi from '../../common/apis/MovieApi';
 import { APIKey } from '../../common/apis/MovieApiKey';
 
 export const fetchAsyncMovies = createAsyncThunk(
-  'movies/fetchAsyncMovies',
+  'movies/fetchAsyncMovies', // 액션 이름
   async () => {
     const movieText = 'twilight';
     const response = await movieApi.get(
