@@ -24,9 +24,18 @@ export const fetchAsyncShows = createAsyncThunk(
   },
 );
 
+export const fetchAsyncMovieOrShowDetail = createAsyncThunk(
+  'movies/fetchAsyncMovieOrShowDetail',
+  async (id) => {
+    const response = await movieApi.get(`?apiKey=${APIKey}&i=${id}&Plot=full`);
+    return response.data;
+  },
+);
+
 const initialState = {
   movies: {},
   shows: {},
+  selectMovieOrShow: {},
 };
 
 const movieSlice = createSlice({
@@ -54,10 +63,16 @@ const movieSlice = createSlice({
       console.log('Fulfilled!');
       return { ...state, shows: payload };
     },
+    [fetchAsyncMovieOrShowDetail.fulfilled]: (state, { payload }) => {
+      console.log('Fulfilled!');
+      return { ...state, selectMovieOrShow: payload };
+    },
   },
 });
 
 export const { addMovies } = movieSlice.actions; // 액션 추가
 export const getAllMovies = (state) => state.reducerName.movies; //state.스토어에 등록한 리듀서 이름.초기값 state이름
 export const getAllShows = (state) => state.reducerName.shows;
+export const getSelectedMovieOrShow = (state) =>
+  state.reducerName.selectMovieOrShow;
 export default movieSlice.reducer;
