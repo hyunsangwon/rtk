@@ -3,7 +3,7 @@
 
 ### 시작 방법
 
-1. npx create-react-app <project-name>
+1. npx create-react-app project-name
 2. yarn add redux react-redux @reduxjs/toolkit
 3. yarn add react-router-dom
 4. yarn add node-sass@5.0.0
